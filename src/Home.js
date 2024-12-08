@@ -4,15 +4,16 @@ import { auth, provider } from './firebase';
 import { useAuthState } from "react-firebase-hooks/auth";
 import UserInfo from "./UserInfo";
 import { useNavigate } from 'react-router-dom';
+import styles from './Home.module.css'; 
 
 function Home() {
   const [user, loading] = useAuthState(auth);
   if (loading) {
-    return <p>ログイン状態を確認中...</p>;
+    return <p className={styles.message}>ログイン状態を確認中...</p>;
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       {user ? (
         <>
           <UserInfo user={user} />
@@ -42,7 +43,7 @@ function SignInButton() {
   };
 
   return (
-    <button onClick={signInWithGoogle}>
+    <button onClick={signInWithGoogle} className={styles.button}>
       ログイン
     </button>
   );
@@ -60,7 +61,7 @@ function SignOutButton() {
   };
 
   return (
-    <button onClick={signOut}>
+    <button onClick={signOut} className={styles.button}>
       ログアウト
     </button>
   );
